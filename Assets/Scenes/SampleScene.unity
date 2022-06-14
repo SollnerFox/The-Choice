@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.65080994, g: 0.666729, b: 0.7075472, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.05
+  m_FogDensity: 0.03
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.13296545, g: 0.19145328, b: 0.33962262, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 0ffaa0b7117ba8c47a9d05ae701d4b4d, type: 2}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154702, g: 0.22719009, b: 0.30740646, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -428,7 +428,7 @@ Transform:
   - {fileID: 731485639}
   - {fileID: 858361563}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &216543265
 CharacterController:
@@ -600,7 +600,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.39551443, g: 0.637549, b: 0.8301887, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -724,7 +724,7 @@ Transform:
   - {fileID: 1636074770}
   - {fileID: 1038873529}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1014563063
 GameObject:
@@ -854,7 +854,7 @@ Transform:
   m_Children:
   - {fileID: 2828308}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1280191162
 GameObject:
@@ -995,7 +995,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1801841203}
+  - {fileID: 1766657255}
   m_Father: {fileID: 952622591}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1166,8 +1168,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 30
-      minScalar: 25
+      scalar: 10
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5998,7 +6000,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1712800000
 GameObject:
@@ -6259,13 +6261,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOfDay: 0
-  dayDuration: 30
+  dayDuration: 300
   SunCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.07857314
+      value: 0.1
       inSlope: 6.427032
       outSlope: 6.427032
       tangentMode: 0
@@ -6274,7 +6276,7 @@ MonoBehaviour:
       outWeight: 0.5293355
     - serializedVersion: 3
       time: 0.029823571
-      value: 0.99969864
+      value: 1
       inSlope: 0.0015162831
       outSlope: 0.0015162831
       tangentMode: 0
@@ -6282,8 +6284,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.093653455
     - serializedVersion: 3
-      time: 0.42844644
-      value: 0.9977766
+      time: 0.41903666
+      value: 1
       inSlope: 0.07955943
       outSlope: 0.07955943
       tangentMode: 0
@@ -6291,7 +6293,7 @@ MonoBehaviour:
       inWeight: 0.109369434
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.52539086
+      time: 0.535656
       value: 0.0023186188
       inSlope: 0.08420733
       outSlope: 0.08420733
@@ -6310,7 +6312,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0.080345154
+      value: 0.1
       inSlope: 3.607069
       outSlope: 3.607069
       tangentMode: 0
@@ -6324,8 +6326,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.24745202
-      value: 0.07857314
+      time: 0.5
+      value: 0.1
       inSlope: 6.427032
       outSlope: 6.427032
       tangentMode: 0
@@ -6333,8 +6335,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.5293355
     - serializedVersion: 3
-      time: 0.2772756
-      value: 0.99969864
+      time: 0.52919924
+      value: 1
       inSlope: 0.0015162831
       outSlope: 0.0015162831
       tangentMode: 0
@@ -6342,8 +6344,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.093653455
     - serializedVersion: 3
-      time: 0.67589843
-      value: 0.9977766
+      time: 0.9141351
+      value: 1
       inSlope: 0.07955943
       outSlope: 0.07955943
       tangentMode: 0
@@ -6351,7 +6353,7 @@ MonoBehaviour:
       inWeight: 0.109369434
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7728429
+      time: 1.013643
       value: 0.0023186188
       inSlope: 0.08420733
       outSlope: 0.08420733
@@ -6360,7 +6362,7 @@ MonoBehaviour:
       inWeight: 0.4305591
       outWeight: 0.093823
     - serializedVersion: 3
-      time: 1.2087222
+      time: 1.4606458
       value: 0.0041243285
       inSlope: -0.09221133
       outSlope: -0.09221133
@@ -6369,8 +6371,8 @@ MonoBehaviour:
       inWeight: 0.085239135
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.247452
-      value: 0.080345154
+      time: 1.5
+      value: 0.1
       inSlope: 3.607069
       outSlope: 3.607069
       tangentMode: 0
@@ -6382,12 +6384,67 @@ MonoBehaviour:
     m_RotationOrder: 4
   SkyboxCurve:
     serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 6.427032
+      outSlope: 6.427032
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.5293355
+    - serializedVersion: 3
+      time: 0.029823571
+      value: 0.99969864
+      inSlope: 0.0015162831
+      outSlope: 0.0015162831
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.093653455
+    - serializedVersion: 3
+      time: 0.41989213
+      value: 0.9977766
+      inSlope: 0.07955943
+      outSlope: 0.07955943
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.109369434
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.51513976
+      value: 0.004027603
+      inSlope: 0.08420733
+      outSlope: 0.08420733
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4305591
+      outWeight: 0.093823
+    - serializedVersion: 3
+      time: 0.9612702
+      value: 0.0041243285
+      inSlope: -0.09221133
+      outSlope: -0.09221133
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.085239135
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: 3.607069
+      outSlope: 3.607069
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.27042437
+      outWeight: 0
+    m_PreInfinity: 1
+    m_PostInfinity: 1
     m_RotationOrder: 4
   DaySkybox: {fileID: 2100000, guid: 0ffaa0b7117ba8c47a9d05ae701d4b4d, type: 2}
   NightSkybox: {fileID: 2100000, guid: daf23f679aacb534487e5913f1b6e2f1, type: 2}
+  Stars: {fileID: 1678136790}
   Sun: {fileID: 2138677392}
   Moon: {fileID: 737224558}
 --- !u!4 &1823742366
@@ -6398,7 +6455,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823742364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.22725, y: 7.006653, z: 29.943954}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
