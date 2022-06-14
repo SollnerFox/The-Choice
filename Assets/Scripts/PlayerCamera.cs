@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {   
-    [SerializeField] private float _sensitiveX;
-    [SerializeField] private float _sensitiveY;
-    [SerializeField]private Transform orientation;
+    [SerializeField] private float _mouseSensitive = 5f;
+    [SerializeField]private Transform _playerBody;
     private float xRotation;
     private float yRotation;
     // Start is called before the first frame update
@@ -20,8 +19,8 @@ public class PlayerCamera : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * _sensitiveX;
-        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * _sensitiveY;
+        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * _mouseSensitive;
+        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * _mouseSensitive;
 
         xRotation -= mouseY;
         yRotation += mouseX;
@@ -29,7 +28,7 @@ public class PlayerCamera : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
-        orientation.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        _playerBody.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
     }
 }
