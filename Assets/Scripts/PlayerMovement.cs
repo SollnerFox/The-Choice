@@ -34,7 +34,15 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 moveDirection = transform.right * x +    transform.forward * z;
         velocity.y += _gravity * Time.deltaTime;
-        characterController.Move(moveDirection * _speed/10 * Time.deltaTime);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            characterController.Move(moveDirection * _speed / 5 * Time.deltaTime);
+        }
+        else 
+        { 
+            characterController.Move(moveDirection * _speed / 10 * Time.deltaTime); 
+        }
+        
 
         if(Input.GetButtonDown("Jump") && isGrounded)
         {

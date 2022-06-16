@@ -7,6 +7,7 @@ public class DayNightManager : MonoBehaviour
     [Range(0, 1)]
     public float timeOfDay;
     public float dayDuration = 30f;
+    public float dayCurrent=1f;
 
     public AnimationCurve SunCurve;
     public AnimationCurve MoonCurve;
@@ -23,6 +24,9 @@ public class DayNightManager : MonoBehaviour
     private float sunIntensity;
     private float moonIntensity;
 
+    public GameObject textWriterObj;
+    TextWriter textWriter;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +39,13 @@ public class DayNightManager : MonoBehaviour
     void Update()
     {
         timeOfDay += Time.deltaTime / dayDuration;
-        if (timeOfDay >= 1) timeOfDay -= 1;
+        if (timeOfDay >= 1)
+        {
+            dayCurrent += 1f;
+            timeOfDay -= 1;
+            textWriter = textWriterObj.GetComponent<TextWriter>();
+            StartCoroutine(textWriter.WriteCurrentDay("Δενό " + dayCurrent, 0.75f));
+        }
 
         RenderSettings.skybox.Lerp(NightSkybox, DaySkybox, SkyboxCurve.Evaluate(timeOfDay));
         RenderSettings.sun = SkyboxCurve.Evaluate(timeOfDay) > 0.1f ? Sun : Moon;
