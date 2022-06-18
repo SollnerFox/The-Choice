@@ -22,14 +22,30 @@ public class PetAgentScript : MonoBehaviour
     public float randomPointRadius = 6f;
     public float distanceToPlayer = 20f;
     public float distanceToFood = 20f;
-    bool playerTooNear, foodIsNear;
-    
+    public bool playerTooNear, foodIsNear;
+
+    public GameObject foxy;
+    Animator _anim;
+
+    Vector3 lastPoint;
+
+    GameObject[] food;
+    GameObject closestFood;
+    public GameObject nearest;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         _petAgent = GetComponent<NavMeshAgent>();
         petTransform = GetComponent<Transform>();
         _petAgentPath = new NavMeshPath();
+
+        _anim = foxy.GetComponent<Animator>();
+
+        lastPoint = petTransform.position;
+        
+
         target = player;
         nearPlayer = Instantiate(nearPlayerPrefab, Vector3.zero, Quaternion.identity).transform;
         StartCoroutine(PetMoving());
@@ -41,22 +57,44 @@ public class PetAgentScript : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             _petAgent.CalculatePath(player.position, _petAgentPath);
-            if (!playerTooNear && _petAgentPath.status == NavMeshPathStatus.PathComplete)
+
+            if (playerTooNear && !foodIsNear)
             {
-                if (Vector3.Distance(petTransform.position, player.position) > randomPointRadius)
+                if (_petAgentPath.status == NavMeshPathStatus.PathComplete)
                 {
-                    if (Vector3.Distance(nearPlayer.position, player.position) > randomPointRadius)
+
+                    if (Vector3.Distance(petTransform.position, player.position) < distanceToPlayer)
                     {
+
+                        yield return new WaitForSeconds(3f);
                         nearPlayer.gameObject.SetActive(true);
                         GoToNearRandomPoint();
                     }
+                    else
+                    {
+                        nearPlayer.gameObject.SetActive(false);
+                        //target = player;
+                    }
+                    _petAgent.SetDestination(target.position);
+
                 }
-                else
+            }
+
+            if (foodIsNear)
+            {
+                if (_petAgentPath.status == NavMeshPathStatus.PathComplete)
                 {
-                    nearPlayer.gameObject.SetActive(false);
-                    //target = player;
+
+                    if (Vector3.Distance(petTransform.position, nearest.transform.position) < distanceToFood)
+                    {
+                        target = nearest.transform;
+                        //yield return new WaitForSeconds(3f);
+
+                    }
+
+                    _petAgent.SetDestination(target.position);
+
                 }
-                _petAgent.SetDestination(target.position);
             }
         }
     }
@@ -85,9 +123,75 @@ public class PetAgentScript : MonoBehaviour
         target = nearPlayer;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         playerTooNear = Physics.CheckSphere(petTransform.position, distanceToPlayer, isPlayer);
         foodIsNear = Physics.CheckSphere(petTransform.position, distanceToFood, isFood);
+
+        nearest = FindClosestFood();
+
+        if (playerTooNear && !foodIsNear)
+        {
+            if (lastPoint != petTransform.position)
+            {
+                _anim.SetBool("Walk", true);
+                lastPoint = petTransform.position;
+            }
+            else
+            {
+                _anim.SetBool("Walk", false);
+                target = player;
+                
+                Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime);
+            }
+
+        }
+
+        if (foodIsNear)
+        {
+            if (lastPoint != petTransform.position)
+            {
+                _anim.SetBool("Walk", true);
+                lastPoint = petTransform.position;
+            }
+            else
+            {
+                _anim.SetBool("Walk", false);
+
+                target = nearest.transform;
+                
+                Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime);
+            }
+
+        }
+    }
+
+    GameObject FindClosestFood()
+    {
+        float distance = Mathf.Infinity;
+        Vector3 position = petTransform.position;
+        food = GameObject.FindGameObjectsWithTag("Food");
+        foreach (GameObject go in food)
+        {
+            Vector3 diff = go.transform.position - position;
+            float currDistance = diff.sqrMagnitude;
+            if(currDistance < distance)
+            {
+                closestFood = go;
+                distance = currDistance;
+            }
+        }
+        return closestFood;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Food"))
+        {
+            
+
+        }
     }
 }

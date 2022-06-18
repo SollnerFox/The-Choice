@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    public static float energy;
+    public float energy;
     private void OnTriggerStay(Collider other) 
     {
         if (other.CompareTag("Player"))

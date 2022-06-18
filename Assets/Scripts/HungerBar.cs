@@ -22,7 +22,7 @@ public class HungerBar : MonoBehaviour
     private void Update()
     {
         _hungerBarSlider.value = _hunger;
-        _hunger -= 1.0f * Time.deltaTime;
+        _hunger -= 1f * Time.deltaTime;
         if (_hunger > maxHunger) _hunger = maxHunger;
         if (_hunger <= 0f)
         {
