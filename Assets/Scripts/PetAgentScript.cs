@@ -66,7 +66,7 @@ public class PetAgentScript : MonoBehaviour
                     if (Vector3.Distance(petTransform.position, player.position) < distanceToPlayer)
                     {
 
-                        yield return new WaitForSeconds(3f);
+                        //yield return new WaitForSeconds(3f);
                         nearPlayer.gameObject.SetActive(true);
                         GoToNearRandomPoint();
                     }
@@ -76,7 +76,7 @@ public class PetAgentScript : MonoBehaviour
                         //target = player;
                     }
                     _petAgent.SetDestination(target.position);
-
+                    yield return new WaitForSeconds(2f);
                 }
             }
 
@@ -130,6 +130,19 @@ public class PetAgentScript : MonoBehaviour
 
         nearest = FindClosestFood();
 
+        if (!playerTooNear && !foodIsNear)
+        {
+            if (lastPoint != petTransform.position)
+            {
+                _anim.SetBool("Walk", true);
+                _anim.SetBool("FindFood", false);
+                _anim.SetBool("Dig", false);
+                lastPoint = petTransform.position;
+            }
+            else { _anim.SetBool("Walk", false); }
+        }
+        
+
         if (playerTooNear && !foodIsNear)
         {
             if (lastPoint != petTransform.position)
@@ -141,7 +154,7 @@ public class PetAgentScript : MonoBehaviour
             {
                 _anim.SetBool("Walk", false);
                 target = player;
-                
+
                 Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime);
             }
@@ -153,12 +166,14 @@ public class PetAgentScript : MonoBehaviour
             if (lastPoint != petTransform.position)
             {
                 _anim.SetBool("Walk", true);
+                _anim.SetBool("FindFood", false);
                 lastPoint = petTransform.position;
             }
             else
             {
                 _anim.SetBool("Walk", false);
-
+                if (Vector3.Distance(petTransform.position, nearest.transform.position) < 2f)
+                _anim.SetBool("FindFood", true);
                 target = nearest.transform;
                 
                 Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
