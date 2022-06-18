@@ -148,11 +148,13 @@ public class PetAgentScript : MonoBehaviour
             if (lastPoint != petTransform.position)
             {
                 _anim.SetBool("Walk", true);
+                _anim.SetBool("FindFood", false);
                 lastPoint = petTransform.position;
             }
             else
             {
                 _anim.SetBool("Walk", false);
+                _anim.SetBool("FindFood", false);
                 target = player;
 
                 Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
