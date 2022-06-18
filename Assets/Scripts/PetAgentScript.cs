@@ -149,12 +149,14 @@ public class PetAgentScript : MonoBehaviour
             {
                 _anim.SetBool("Walk", true);
                 _anim.SetBool("FindFood", false);
+                _anim.SetBool("Dig", false);
                 lastPoint = petTransform.position;
             }
             else
             {
                 _anim.SetBool("Walk", false);
                 _anim.SetBool("FindFood", false);
+                _anim.SetBool("Dig", false);
                 target = player;
 
                 Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
@@ -169,13 +171,22 @@ public class PetAgentScript : MonoBehaviour
             {
                 _anim.SetBool("Walk", true);
                 _anim.SetBool("FindFood", false);
+                _anim.SetBool("Dig", false);
                 lastPoint = petTransform.position;
             }
             else
             {
                 _anim.SetBool("Walk", false);
-                if (Vector3.Distance(petTransform.position, nearest.transform.position) < 2f)
-                _anim.SetBool("FindFood", true);
+
+                if (Vector3.Distance(petTransform.position, nearest.transform.position) < 1.5f)
+                {
+                    if (!nearest.GetComponent<Food>().canBeEaten)
+                    { 
+                        _anim.SetBool("Dig", true);
+                        StartCoroutine(PetDigging());
+                    }
+                    else { _anim.SetBool("FindFood", true); }
+                }
                 target = nearest.transform;
                 
                 Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
@@ -183,6 +194,7 @@ public class PetAgentScript : MonoBehaviour
             }
 
         }
+
     }
 
     GameObject FindClosestFood()
@@ -203,12 +215,11 @@ public class PetAgentScript : MonoBehaviour
         return closestFood;
     }
 
-    private void OnTriggerStay(Collider other)
+    IEnumerator PetDigging()
     {
-        if (other.CompareTag("Food"))
-        {
-            
-
-        }
+        yield return new WaitForSeconds(3f);
+        nearest.GetComponent<Food>().digging = true;
+        _anim.SetBool("Dig", false);
     }
+
 }

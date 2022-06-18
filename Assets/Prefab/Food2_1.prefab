@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 8449841901029148696}
   - component: {fileID: 2237956080041578900}
   - component: {fileID: 9121527588460849089}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Food2_1
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,3 +159,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energy: 20
+  canBeEaten: 1

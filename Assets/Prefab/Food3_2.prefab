@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energy: 20
+  canBeEaten: 0
+  digging: 0
 --- !u!1001 &3726271609335980058
 PrefabInstance:
   m_ObjectHideFlags: 0
