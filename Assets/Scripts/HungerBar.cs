@@ -13,7 +13,7 @@ public class HungerBar : MonoBehaviour
     private Slider _hungerBarSlider;
     public static float _hunger;
     private float maxHunger = 100f;
-    
+
     private void Start()
     {
         _hungerBarSlider = GetComponent<Slider>();

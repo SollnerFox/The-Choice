@@ -27,6 +27,7 @@ public class DayNightManager : MonoBehaviour
     public GameObject textWriterObj;
     TextWriter textWriter;
 
+    public PauseMenu gameMusic;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,27 @@ public class DayNightManager : MonoBehaviour
             dayCurrent += 1f;
             timeOfDay -= 1;
             textWriter = textWriterObj.GetComponent<TextWriter>();
+
+            if (dayCurrent == 1)
+            {
+                gameMusic.gameAudio.clip = gameMusic.dayMusic[0];
+                gameMusic.gameAudio.Play();
+            }
+
+            if (dayCurrent == 2)
+            {
+                gameMusic.gameAudio.clip = gameMusic.dayMusic[1];
+                gameMusic.gameAudio.Play();
+            }
+
+            if (dayCurrent == 3)
+            {
+                gameMusic.gameAudio.clip = gameMusic.dayMusic[2];
+                gameMusic.gameAudio.Play();
+            }
+
             StartCoroutine(textWriter.WriteCurrentDay("Day " + dayCurrent, 0.75f));
+
         }
 
         RenderSettings.skybox.Lerp(NightSkybox, DaySkybox, SkyboxCurve.Evaluate(timeOfDay));

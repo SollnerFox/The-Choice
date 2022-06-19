@@ -7,8 +7,18 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public DayNightManager dayManager;
+
     public AudioSource menuAudio;
     public AudioSource gameAudio;
+
+    public AudioClip[] dayMusic;
+
+    private void Start()
+    {
+        gameAudio.Play();
+    }
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -22,6 +32,8 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
+
+        
     }
     public void ResumeGame()
     {

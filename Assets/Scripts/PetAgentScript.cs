@@ -33,6 +33,11 @@ public class PetAgentScript : MonoBehaviour
     GameObject closestFood;
     public GameObject nearest;
 
+    public AudioSource voiceAudio;
+    public AudioClip[] voiceClip;
+    public float voiceTimer = 0.7f;
+    private float voiceTimerDown;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -164,6 +169,16 @@ public class PetAgentScript : MonoBehaviour
 
                 Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime);
+
+                if (voiceTimerDown > 0)
+                { voiceTimerDown -= Time.deltaTime; }
+                if (voiceTimerDown < 0)
+                { voiceTimerDown = 0; }
+                if (voiceTimerDown == 0)
+                {
+                    voiceAudio.PlayOneShot(voiceClip[Random.Range(0, voiceClip.Length)], 0.5f);
+                    voiceTimerDown = voiceTimer;
+                }
             }
 
         }

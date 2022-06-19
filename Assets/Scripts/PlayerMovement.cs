@@ -1,4 +1,4 @@
-
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -13,10 +13,20 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private CharacterController characterController;
+
+    public AudioSource stepAudio;
+    public AudioClip[] groundClip;
+    public float stepTimer = 0.7f;
+    private float stepTimerDown;
+    private RaycastHit hit;
+    Vector3 lastPoint;
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        lastPoint = transform.position;
     }
+
 
 
     private void Update()
@@ -40,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else 
         { 
-            characterController.Move(moveDirection * _speed / 10f * Time.deltaTime); 
+            characterController.Move(moveDirection * _speed / 10f * Time.deltaTime);
+            //stepAudio.Play();
         }
         
 
@@ -50,9 +61,43 @@ public class PlayerMovement : MonoBehaviour
         }
 
         characterController.Move(velocity * Time.deltaTime);
+        
+        if (lastPoint != transform.position)
+        {
+            lastPoint = transform.position;
+            Sound();
+        }
+        else
+        {
+            stepAudio.Stop();
+        }
     }
+
+    
     private void OnDrawGizmos() 
     {
         Gizmos.DrawSphere(_groundCheck.position, _groundDistance);
+    }
+
+    
+
+    void Sound()
+    {
+        if (stepTimerDown > 0)
+        { stepTimerDown -= Time.deltaTime; }
+        if (stepTimerDown < 0)
+        { stepTimerDown = 0; }
+        if (stepTimerDown == 0)
+        {
+            if (Physics.Raycast(transform.position, -Vector3.up, out hit, 10))
+            {
+                if (hit.transform.tag == "Ground")
+                {
+                    stepAudio.PlayOneShot(groundClip[Random.Range(0, groundClip.Length)], 0.5f);
+                }
+
+            }
+            stepTimerDown = stepTimer;
+        }
     }
 }
