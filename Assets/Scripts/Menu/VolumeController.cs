@@ -1,26 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class VolumeController : MonoBehaviour
 {
-    private AudioSource audioSource;
-    private float musicVol = 1f;
+    [SerializeField] private AudioMixer _audioMixer;
 
-
-    void Start()
+    public void SetVolume(float volume)
     {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        audioSource.volume = musicVol;
-    }
-
-    public void SetVolume(float vol)
-    {
-        musicVol = vol;
+        _audioMixer.SetFloat("volume", volume);
     }
 }

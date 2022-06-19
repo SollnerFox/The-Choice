@@ -31,4 +31,10 @@ public class PlayerCamera : MonoBehaviour
         _playerBody.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
     }
+
+    public void Sensitive(float newSensitive)
+    {
+        _mouseSensitive = newSensitive;
+    }
+
 }
