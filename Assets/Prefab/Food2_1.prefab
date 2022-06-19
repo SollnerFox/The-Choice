@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2142796658792751528}
   m_LocalRotation: {x: -0.58719385, y: -0.026757777, z: 0.026757779, w: 0.8085613}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 7119444218658763421}
   m_RootOrder: 0
@@ -159,6 +159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   berries: {fileID: 5641612296444380388}
-  energy: 20
+  energy: 25
   canBeEaten: 1
   digging: 0

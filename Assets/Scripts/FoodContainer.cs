@@ -13,10 +13,13 @@ public class FoodContainer : MonoBehaviour
     public AudioClip[] foodEatClip;
 
     public bool foxyHere=false;
+    public bool foodHere = false;
     GameObject textOver;
     GameObject textEatFoxy;
     public GameObject foxyObj;
     public GameObject bonesObj;
+
+    public PauseMenu gameMusic;
 
     void Start()
     {
@@ -63,7 +66,7 @@ public class FoodContainer : MonoBehaviour
         {
             imageFood.SetActive(false);
             textOver.SetActive(false);
-            if (foxyHere && HungerBar._hunger <= 95f)
+            if (foxyHere && !foodHere && HungerBar._hunger <= 15f)
             {
                 textEatFoxy.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
@@ -72,6 +75,9 @@ public class FoodContainer : MonoBehaviour
                     textEatFoxy.SetActive(false);
                     foxyHere = false;
                     Destroy(foxyObj);
+                    foxyObj = null;
+                    gameMusic.gameAudio.clip = gameMusic.dayMusic[2];
+                    gameMusic.gameAudio.Play();
                 }
             }
             else { textEatFoxy.SetActive(false); }
@@ -85,6 +91,11 @@ public class FoodContainer : MonoBehaviour
         {
             foxyHere = true;
         }
+
+        if (other.CompareTag("Food"))
+        {
+            foodHere = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -92,6 +103,11 @@ public class FoodContainer : MonoBehaviour
         if (other.CompareTag("Foxy"))
         {
             foxyHere = false;
+        }
+
+        if (other.CompareTag("Food"))
+        {
+            foodHere = true;
         }
     }
 

@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   berries: {fileID: 4505195381210433544}
-  energy: 20
+  energy: 30
   canBeEaten: 0
   digging: 0
 --- !u!1001 &3105302047590407945

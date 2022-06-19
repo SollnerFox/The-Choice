@@ -29,6 +29,8 @@ public class DayNightManager : MonoBehaviour
 
     public PauseMenu gameMusic;
 
+    public GameObject[] foodInScene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,18 +52,31 @@ public class DayNightManager : MonoBehaviour
             {
                 gameMusic.gameAudio.clip = gameMusic.dayMusic[0];
                 gameMusic.gameAudio.Play();
+                foodInScene[0].SetActive(true);
+                foodInScene[1].SetActive(false);
+                foodInScene[2].SetActive(false);
             }
 
             if (dayCurrent == 2)
             {
                 gameMusic.gameAudio.clip = gameMusic.dayMusic[1];
                 gameMusic.gameAudio.Play();
+                foodInScene[0].SetActive(false);
+                foodInScene[1].SetActive(true);
+                foodInScene[2].SetActive(false);
             }
 
             if (dayCurrent == 3)
             {
                 gameMusic.gameAudio.clip = gameMusic.dayMusic[2];
                 gameMusic.gameAudio.Play();
+                foodInScene[0].SetActive(false);
+                foodInScene[1].SetActive(false);
+                foodInScene[2].SetActive(true);
+            }
+            if (dayCurrent == 4)
+            {
+
             }
 
             StartCoroutine(textWriter.WriteCurrentDay("Day " + dayCurrent, 0.75f));
