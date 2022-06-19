@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     AsyncOperation asyncLoading;
-    public TextMeshProUGUI loadingText;
 
     public void PlayGame()
     {
@@ -27,8 +26,6 @@ public class MainMenu : MonoBehaviour
         while (!asyncLoading.isDone)
         {
             float progress = asyncLoading.progress / 0.9f;
-            loadingText.enabled = true;
-            loadingText.text = "Loading...  " + string.Format("{0:0}%", progress * 100f);
             yield return 0;
         }
     }

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class HungerBar : MonoBehaviour
 {
     [SerializeField] private GameObject _deathUiObject;
+    [SerializeField] private Gradient _gradient;
+    [SerializeField] private Image _fill;
     private Slider _hungerBarSlider;
     public static float _hunger;
     private float maxHunger = 100f;
@@ -16,12 +18,14 @@ public class HungerBar : MonoBehaviour
     {
         _hungerBarSlider = GetComponent<Slider>();
         _hunger = maxHunger;
+        _fill.color = _gradient.Evaluate(1f);
     }
 
     
     private void Update()
     {
         _hungerBarSlider.value = _hunger;
+        _fill.color = _gradient.Evaluate(_hungerBarSlider.normalizedValue);
         _hunger -= 1f * Time.deltaTime;
         if (_hunger > maxHunger) _hunger = maxHunger;
         if (_hunger <= 0f)
