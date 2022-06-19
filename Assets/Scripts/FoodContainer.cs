@@ -12,11 +12,13 @@ public class FoodContainer : MonoBehaviour
     public AudioSource foodEatAudio;
     public AudioClip[] foodEatClip;
 
-    bool foxyHere=false;
+    public bool foxyHere=false;
+    GameObject textOver;
 
     void Start()
     {
         imageFood = GameObject.Find("UI/Canvas/FoodBar/HaveFood");
+        textOver = GameObject.Find("UI/Canvas/FoxyTextOver");
     }
 
     
@@ -25,6 +27,15 @@ public class FoodContainer : MonoBehaviour
         if (haveFood)
         {
             imageFood.SetActive(true);
+
+            if (foxyHere)
+            {
+                textOver.SetActive(true);
+            }
+            else
+            {
+                textOver.SetActive(false);
+            }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -47,6 +58,7 @@ public class FoodContainer : MonoBehaviour
         else
         {
             imageFood.SetActive(false);
+            textOver.SetActive(false);
         }
     }
 
@@ -55,10 +67,6 @@ public class FoodContainer : MonoBehaviour
         if (other.CompareTag("Foxy"))
         {
             foxyHere = true;
-            
-            //playerFood = other.GetComponent<FoodContainer>();
-            //textOver.SetActive(true);
-            //stayOnFood = true;
         }
     }
 
@@ -66,7 +74,7 @@ public class FoodContainer : MonoBehaviour
     {
         if (other.CompareTag("Foxy"))
         {
-            foxyHere = true;
+            foxyHere = false;
         }
     }
 
