@@ -18,6 +18,7 @@ public class FoodContainer : MonoBehaviour
     GameObject textEatFoxy;
     public GameObject foxyObj;
     public GameObject bonesObj;
+    [SerializeField] private GameObject _foxDeathPatricle;
 
     public PauseMenu gameMusic;
 
@@ -72,6 +73,7 @@ public class FoodContainer : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     Instantiate(bonesObj, new Vector3(foxyObj.transform.position.x, foxyObj.transform.position.y-0.1f, foxyObj.transform.position.z), foxyObj.transform.rotation);
+                    Instantiate(_foxDeathPatricle, new Vector3(foxyObj.transform.position.x, foxyObj.transform.position.y + 0.2f, foxyObj.transform.position.z), foxyObj.transform.rotation);
                     textEatFoxy.SetActive(false);
                     foxyHere = false;
                     Destroy(foxyObj);
