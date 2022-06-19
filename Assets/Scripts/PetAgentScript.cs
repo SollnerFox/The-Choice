@@ -236,8 +236,12 @@ public class PetAgentScript : MonoBehaviour
     IEnumerator PetDigging()
     {
         yield return new WaitForSeconds(3f);
-        nearest.GetComponent<Food>().digging = true;
-        _anim.SetBool("Dig", false);
+        if (nearest !=null)
+        {
+            nearest.GetComponent<Food>().digging = true;
+            _anim.SetBool("Dig", false);
+        }
+        
     }
 
 }

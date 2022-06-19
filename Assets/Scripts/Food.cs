@@ -58,6 +58,7 @@ public class Food : MonoBehaviour
                 {
                     playerFood.haveFood = true;
                     playerFood.energy = energy;
+                    playerFood.foodHere = false;
                     //HungerBar._hunger += energy;
 
                     textOver.SetActive(false);
