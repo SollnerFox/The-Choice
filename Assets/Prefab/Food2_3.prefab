@@ -158,5 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a058d703048044291c45f32e7702cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  berries: {fileID: 6590042500758789097}
   energy: 20
   canBeEaten: 1
+  digging: 0

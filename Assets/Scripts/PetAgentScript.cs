@@ -44,7 +44,7 @@ public class PetAgentScript : MonoBehaviour
         _anim = foxy.GetComponent<Animator>();
 
         lastPoint = petTransform.position;
-        
+
 
         target = player;
         nearPlayer = Instantiate(nearPlayerPrefab, Vector3.zero, Quaternion.identity).transform;
@@ -127,8 +127,11 @@ public class PetAgentScript : MonoBehaviour
     {
         playerTooNear = Physics.CheckSphere(petTransform.position, distanceToPlayer, isPlayer);
         foodIsNear = Physics.CheckSphere(petTransform.position, distanceToFood, isFood);
-
-        nearest = FindClosestFood();
+        
+        if (foodIsNear)
+        {
+            nearest = FindClosestFood();
+        }
 
         if (!playerTooNear && !foodIsNear)
         {
@@ -178,7 +181,7 @@ public class PetAgentScript : MonoBehaviour
             {
                 _anim.SetBool("Walk", false);
 
-                if (Vector3.Distance(petTransform.position, nearest.transform.position) < 1.5f)
+                if (Vector3.Distance(petTransform.position, nearest.transform.position) < 2f)
                 {
                     if (!nearest.GetComponent<Food>().canBeEaten)
                     { 

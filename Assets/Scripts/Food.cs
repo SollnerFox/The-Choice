@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
+
+    public GameObject berries;
     public float energy;
     public bool canBeEaten = true;
     public bool digging = false;
@@ -19,7 +21,7 @@ public class Food : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && berries != null)
         {
             playerFood = other.GetComponent<FoodContainer>();
             textOver.SetActive(true);
@@ -29,7 +31,7 @@ public class Food : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && berries != null)
         {
             playerFood = null;
             textOver.SetActive(false);
@@ -49,7 +51,7 @@ public class Food : MonoBehaviour
 
         if (stayOnFood)
         {
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.E) && berries != null)
             {
                 
                 if (canBeEaten && !playerFood.haveFood)
@@ -59,7 +61,10 @@ public class Food : MonoBehaviour
                     //HungerBar._hunger += energy;
 
                     textOver.SetActive(false);
-                    Destroy(gameObject);
+                    Destroy(berries);
+                    berries = null;
+                    gameObject.layer = 0;
+                    gameObject.tag = "Untagged";
                 }
             }
         }
