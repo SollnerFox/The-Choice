@@ -196,7 +196,7 @@ public class PetAgentScript : MonoBehaviour
             {
                 _anim.SetBool("Walk", false);
 
-                if (Vector3.Distance(petTransform.position, nearest.transform.position) < 2f)
+                if (Vector3.Distance(petTransform.position, nearest.transform.position) < 2.0f)
                 {
                     if (!nearest.GetComponent<Food>().canBeEaten)
                     { 
