@@ -40,7 +40,7 @@ AudioSource:
   m_GameObject: {fileID: 302131690}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e710358b71a096747bcd7937e8bd0ee9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -167,7 +167,7 @@ AudioSource:
   m_GameObject: {fileID: 3423475424631972538}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e710358b71a096747bcd7937e8bd0ee9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -412,6 +412,7 @@ MonoBehaviour:
   foodEatClip:
   - {fileID: 8300000, guid: 6b473dc344ec6b44eb2d8a49e01efc98, type: 3}
   - {fileID: 8300000, guid: 6080bbbe2847eae46a5c876c6c10fc81, type: 3}
+  foxyHere: 0
 --- !u!1 &4707364817330357752
 GameObject:
   m_ObjectHideFlags: 0

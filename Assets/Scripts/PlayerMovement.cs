@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (hit.transform.tag == "Ground")
                 {
-                    stepAudio.PlayOneShot(groundClip[Random.Range(0, groundClip.Length)], 0.5f);
+                    stepAudio.PlayOneShot(groundClip[Random.Range(0, groundClip.Length)], 0.2f);
                 }
 
             }
