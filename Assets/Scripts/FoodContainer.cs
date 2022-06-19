@@ -12,7 +12,7 @@ public class FoodContainer : MonoBehaviour
     public AudioSource foodEatAudio;
     public AudioClip[] foodEatClip;
 
-    public Camera camera;
+    bool foxyHere=false;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class FoodContainer : MonoBehaviour
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         if (haveFood)
         {
@@ -28,20 +28,20 @@ public class FoodContainer : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                RaycastHit hit;
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit))
+                if (foxyHere)
                 {
-                    Transform objectHit = hit.transform;
-                    Debug.Log(objectHit);
+                    PetHungerBar._hunger += energy;
+                    energy = 0f;
+                    haveFood = false;
                 }
+                else
+                {
+                    HungerBar._hunger += energy;
+                    energy = 0f;
+                    haveFood = false;
 
-                HungerBar._hunger += energy;
-                energy = 0f;
-                haveFood = false;
-                
-                foodEatAudio.PlayOneShot(foodEatClip[Random.Range(0, foodEatClip.Length)], 0.5f);
-                
+                    foodEatAudio.PlayOneShot(foodEatClip[Random.Range(0, foodEatClip.Length)], 0.5f);
+                }
             }
         }
         else
@@ -49,4 +49,25 @@ public class FoodContainer : MonoBehaviour
             imageFood.SetActive(false);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Foxy"))
+        {
+            foxyHere = true;
+            
+            //playerFood = other.GetComponent<FoodContainer>();
+            //textOver.SetActive(true);
+            //stayOnFood = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Foxy"))
+        {
+            foxyHere = true;
+        }
+    }
+
 }
