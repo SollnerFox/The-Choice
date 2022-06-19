@@ -20,7 +20,7 @@ public class TextWriter : MonoBehaviour
     void Start()
     {
         dayManager = dayManagerObject.GetComponent<DayNightManager>();
-        StartCoroutine(WriteCurrentDay("Δενό "+ dayManager.dayCurrent, textDelay));
+        StartCoroutine(WriteCurrentDay("Day "+ dayManager.dayCurrent, textDelay));
     }
 
     public IEnumerator WriteCurrentDay(string txt, float delay)
