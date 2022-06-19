@@ -7,18 +7,36 @@ public class Food : MonoBehaviour
     public float energy;
     public bool canBeEaten = true;
     public bool digging = false;
+    bool stayOnFood;
 
-    private void OnTriggerStay(Collider other) 
+    GameObject textOver;
+    FoodContainer playerFood;
+
+    void Start()
+    {
+        textOver = GameObject.Find("UI/Canvas/FoodTextOver");
+    }
+    
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.E) && canBeEaten)
-            {
-                HungerBar._hunger += energy;
-                Destroy(gameObject);
-            }
+            playerFood = other.GetComponent<FoodContainer>();
+            textOver.SetActive(true);
+            stayOnFood = true;
         }
     }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerFood = null;
+            textOver.SetActive(false);
+            stayOnFood = false;
+        }
+    }
+
 
     void Update()
     {
@@ -27,6 +45,23 @@ public class Food : MonoBehaviour
             digging = false;
             canBeEaten = true;
             StartCoroutine(Drop());
+        }
+
+        if (stayOnFood)
+        {
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                
+                if (canBeEaten && !playerFood.haveFood)
+                {
+                    playerFood.haveFood = true;
+                    playerFood.energy = energy;
+                    //HungerBar._hunger += energy;
+
+                    textOver.SetActive(false);
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 
@@ -41,8 +76,8 @@ public class Food : MonoBehaviour
         for (var j = 0; j < 7; j++)
         {
             yield return new WaitForSeconds(0.035f);
-            transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
-            transform.Rotate(-15f,0f,0f);
+            transform.position = new Vector3(transform.position.x, transform.position.y - 0.19f, transform.position.z);
+            transform.Rotate(13f,0f,0f);
         }
 
     }

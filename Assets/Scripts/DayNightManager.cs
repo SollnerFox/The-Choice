@@ -44,7 +44,7 @@ public class DayNightManager : MonoBehaviour
             dayCurrent += 1f;
             timeOfDay -= 1;
             textWriter = textWriterObj.GetComponent<TextWriter>();
-            StartCoroutine(textWriter.WriteCurrentDay("Δενό " + dayCurrent, 0.75f));
+            StartCoroutine(textWriter.WriteCurrentDay("Day " + dayCurrent, 0.75f));
         }
 
         RenderSettings.skybox.Lerp(NightSkybox, DaySkybox, SkyboxCurve.Evaluate(timeOfDay));
